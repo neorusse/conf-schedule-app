@@ -36,11 +36,11 @@ Invoke the build at the root of the project:
     $ ./mvnw spring-boot:run
 ----
 
-The app runs on port 8080.
+The app runs on port 5000.
 
 
 ```bash
-DATABASE_URL='jdbc:postgresql://localhost:5432/conf_schedule_app'
+DATABASE_URL='jdbc:postgresql://localhost:5432/database'
 ```
 
 
