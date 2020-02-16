@@ -1,0 +1,3 @@
+# Override server default port
+server:
+  port: ${PORT}
