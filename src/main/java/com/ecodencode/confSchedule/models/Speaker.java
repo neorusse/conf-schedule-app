@@ -1,22 +1,34 @@
 package com.ecodencode.confSchedule.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "speakers")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Speaker {
 
   // private fields
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long speaker_id;
+
   private String first_name;
   private String last_name;
   private String title;
   private String company;
   private String speaker_bio;
+
+  @Lob
+  @Type(type = "org.hibernate.type.BinaryType")
+  private byte[] speaker_photo;
+
+  @ManyToMany(mappedBy = "speakers")
+  @JsonIgnore
+  private List<Session> sessions;
 
   // default constructor
   public Speaker() {
@@ -69,5 +81,21 @@ public class Speaker {
 
   public void setSpeaker_bio(String speaker_bio) {
     this.speaker_bio = speaker_bio;
+  }
+
+  public List<Session> getSessions() {
+    return sessions;
+  }
+
+  public void setSessions(List<Session> sessions) {
+    this.sessions = sessions;
+  }
+
+  public byte[] getSpeaker_photo() {
+    return speaker_photo;
+  }
+
+  public void setSpeaker_photo(byte[] speaker_photo) {
+    this.speaker_photo = speaker_photo;
   }
 }
